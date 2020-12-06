@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.wrap {
+    width: 1280px;
+    margin: 0px auto;
+    background-color: aliceblue;
+    text-align: center;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    margin: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    background-color:#007bff;
+    font-size: 20px;
+    color:#fff
+}
+
+.btn.active {
+    background: #555;
+    color: rgb(163, 255, 78);
+}
+.btn:not(.active):hover{
+    background: #ccc;
+  }
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column
+}
+
+
+.my-table {
+    max-width: 800px;
+    margin-bottom:1rem;
+    color:#072c4e;
+    text-align: center;
+    background-color: rgb(238, 238, 238);
+}
+
+.my-table td,.my-table th {
+    padding:.75rem;
+    vertical-align:top;
+    border-top:1px solid #dee2e6;
+}
+
+.add-task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.new-task {
+    display: none;
+}
+
+.visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    display:block;
+    width:400px;
+    height:calc(1.5em + .75rem + 2px);
+    padding:.375rem .75rem;
+    font-size:1rem;
+    font-weight:400;
+    line-height:1.5;
+    color:#495057;
+    background-color:#fff;
+    background-clip:padding-box;
+    border:1px solid #ced4da;
+    border-radius:.25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+textarea.form-control{
+    height: auto;
+}
+
+.custom-select{
+    display:inline-block;
+    width: 200px;
+    height:calc(1.5em + .75rem + 2px);
+    padding:.375rem 1.75rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight:400;
+    line-height:1.5;
+    color:#495057;
+    vertical-align:middle;
+    background:#fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") 
+    no-repeat right .75rem center/8px 10px;
+    border:1px solid #ced4da;
+    border-radius:.25rem;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+}
+
