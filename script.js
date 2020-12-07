@@ -1,67 +1,111 @@
 let data = {
     part0: [
       {
-        firstName: 'Помыть пол',
-        lastName: 'Помыть полы в доме',
-        age: 'Высокий'
+        name: 'Помыть пол',
+        description: 'Помыть полы в доме',
+        priority: 'Высокий'
       }, {
-        firstName: 'Помыть пол',
-        lastName: 'Помыть полы в доме',
-        age: 'Высокий'
+        name: 'Помыться',
+        description: 'Помыться',
+        priority: 'Высокий'
       }, {
-        firstName: 'Помыть пол',
-        lastName: 'Помыть полы в доме',
-        age: 'Высокий'
+        name: 'Побриться',
+        description: 'Побриться',
+        priority: 'Высокий'
       }
     ],
     part1: [
       {
-        firstName: 'Побриться',
-        lastName: '---',
-        age: 'Высокий'
-      }, {
-        firstName: 'Побриться',
-        lastName: '---',
-        age: 'Высокий'
-      }, {
-        firstName: 'Побриться',
-        lastName: '---',
-        age: 'Высокий'
+        name: 'Побриться',
+        description: '---',
+        priority: 'Высокий'
       }
     ],
     part2: [
       {
-        firstName: 'Помыться',
-        lastName: '---',
-        age: 'Высокий'
-      }, {
-        firstName: 'Помыться',
-        lastName: '---',
-        age: 'Высокий'
-      }, {
-        firstName: 'Помыться',
-        lastName: '---',
-        age: 'Высокий'
+        name: 'Помыться',
+        description: '---',
+        priority: 'Высокий'
       }
     ]
   };
+  
 
-  function tableDraw(mass){
+  function deleteTask() {
+    let $deleteTask = document.querySelectorAll('.delete');
+    for (let i = 0; i < $deleteTask.length; i++) {
+        $deleteTask[i].addEventListener('click', function() {
+          
+          let deleteTask = data.part0.splice(i, 1);
+          data.part2.push(deleteTask[0])
+          tableDrawCurrentTask(data.part0)
+         
+        })
+    }
+    }
+
+    function finishedTask() {
+      let $finishedTask = document.querySelectorAll('.finished');
+      for (let i = 0; i < $finishedTask.length; i++) {
+          $finishedTask[i].addEventListener('click', function() {
+            
+            let finishedTask = data.part0.splice(i, 1);
+            data.part1.push(finishedTask[0])
+            tableDrawCurrentTask(data.part0)
+           
+          })
+      }
+      }
+
+
+  function tableDrawCurrentTask(mass){
 	let $table = document.querySelector('.table-content');
 	$table.innerHTML = '';
   for(let el of mass){
     $table.innerHTML += `<tr>
-        <td>${el.firstName}</td>
-        <td>${el.lastName}</td>
-        <td>${el.age}</td>
+        <td>${el.name}</td>
+        <td>${el.description}</td>
+        <td>${el.priority}</td>
         <td><button class="redit">Редактировать</button>
-                        <button>Выполнено</button>
-                        <button>Удалить</button>
+                        <button class="finished">Выполнено</button>
+                        <button class="delete">Удалить</button>
                         </td>
+      </tr>`;
+  }
+  deleteTask()
+  finishedTask()
+}
+
+
+function tableDrawFinishedTask(mass){
+	let $table = document.querySelector('.table-content');
+	$table.innerHTML = '';
+  for(let el of mass){
+    $table.innerHTML += `<tr>
+        <td>${el.name}</td>
+        <td>${el.description}</td>
+        <td>${el.priority}</td>
+        <td><button class="redit">Редактировать</button>
+            <button class="delete">Удалить</button>
+        </td>
       </tr>`;
   }
 }
 
+
+function tableDrawDeleteTask(mass){
+	let $table = document.querySelector('.table-content');
+	$table.innerHTML = '';
+  for(let el of mass){
+    $table.innerHTML += `<tr>
+        <td>${el.name}</td>
+        <td>${el.description}</td>
+        <td>${el.priority}</td>
+        <td><button class="recover">Восстановить</button>
+        </td>
+      </tr>`;
+  }
+}
 
 
 let $btn = document.querySelectorAll('.tab');
@@ -76,13 +120,21 @@ function toggler (selector, id, modify) {
 
 (function init(){
     toggler('.tab', 0, 'active');
-    tableDraw(data.part0);
+    tableDrawCurrentTask(data.part0);
 })();
 
 for(let i = 0; i < $btn.length; i++){
 	$btn[i].addEventListener('click', function(){
     toggler('.tab', i, 'active');
-    tableDraw(data['part' + i]);
+    if(i === 0) {
+      tableDrawCurrentTask(data['part' + i]);
+    }
+    else if(i === 1) {
+      tableDrawFinishedTask(data['part' + i]);
+    }
+    else if(i === 2) {
+      tableDrawDeleteTask(data['part' + i]);
+    }
   })
 }
 
@@ -103,12 +155,14 @@ $addNewTask.addEventListener("click", function(event) {
   event.preventDefault();
 
   let newTask = {
-    firstName: nameTask.value,
-    lastName: taskDescription.value,
-    age: taskSelect.value
+    name: nameTask.value,
+    description: taskDescription.value,
+    priority: taskSelect.value
   };
   data.part0.push(newTask)
-  tableDraw(data.part0)
+  tableDrawCurrentTask(data.part0)
+  nameTask.value = '';
+  taskDescription.value = '';
 }
 )
 
@@ -121,9 +175,3 @@ $closeForm.addEventListener("click", function(event) {
   $newTask.classList.remove('visible')
 }
 )
-
-let $redit = document.querySelectorAll('.redit');
-
-for (let el of $redit) {
-    console.log('выведи в консоль ', el)
-}
