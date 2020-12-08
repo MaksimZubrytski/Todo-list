@@ -118,3 +118,6 @@ textarea.form-control{
     appearance:none;
 }
 
+.redit-task {
+    display: none;
+}

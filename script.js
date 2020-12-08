@@ -31,15 +31,13 @@ let data = {
   };
   
 
-  function deleteTask() {
+  function deleteTask(mass, tableDrawFunction) {
     let $deleteTask = document.querySelectorAll('.delete');
     for (let i = 0; i < $deleteTask.length; i++) {
         $deleteTask[i].addEventListener('click', function() {
-          
-          let deleteTask = data.part0.splice(i, 1);
+          let deleteTask = mass.splice(i, 1);
           data.part2.push(deleteTask[0])
-          tableDrawCurrentTask(data.part0)
-         
+          tableDrawFunction(mass)
         })
     }
     }
@@ -58,6 +56,20 @@ let data = {
       }
 
 
+      function recoverTask() {
+        let $recoverTask = document.querySelectorAll('.recover');
+        for (let i = 0; i < $recoverTask.length; i++) {
+            $recoverTask[i].addEventListener('click', function() {
+              
+              let recoverTask = data.part2.splice(i, 1);
+              data.part0.push(recoverTask[0])
+              tableDrawDeleteTask(data.part2)
+             
+            })
+      }
+      }
+
+
   function tableDrawCurrentTask(mass){
 	let $table = document.querySelector('.table-content');
 	$table.innerHTML = '';
@@ -67,12 +79,12 @@ let data = {
         <td>${el.description}</td>
         <td>${el.priority}</td>
         <td><button class="redit">Редактировать</button>
-                        <button class="finished">Выполнено</button>
-                        <button class="delete">Удалить</button>
-                        </td>
+            <button class="finished">Выполнено</button>
+            <button class="delete">Удалить</button>
+        </td>
       </tr>`;
   }
-  deleteTask()
+  deleteTask(data.part0, tableDrawCurrentTask)
   finishedTask()
 }
 
@@ -90,6 +102,7 @@ function tableDrawFinishedTask(mass){
         </td>
       </tr>`;
   }
+  deleteTask(data.part1, tableDrawFinishedTask)
 }
 
 
@@ -105,6 +118,7 @@ function tableDrawDeleteTask(mass){
         </td>
       </tr>`;
   }
+  recoverTask();
 }
 
 
@@ -144,7 +158,6 @@ $addTaskbutton.addEventListener('click', function() {
     
     $newTask.classList.add('visible')
     
-
 })
 
 let $addNewTask = document.querySelector('.add-new-task')
@@ -175,3 +188,14 @@ $closeForm.addEventListener("click", function(event) {
   $newTask.classList.remove('visible')
 }
 )
+
+let $reditButton = document.querySelectorAll('.redit');
+let $reditTaskForm = document.querySelectorAll('.redit-task');
+for (let i = 0; i < $reditButton.length; i++) {
+    $reditButton[i].addEventListener('click', function () {
+      $reditTaskForm.classList.add('add-task')
+        console.log(data.part0[i].name)
+        console.log(data.part0[i].description)
+        console.log(data.part0[i].priority)
+    })
+}

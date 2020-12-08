@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo list</title>
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -33,27 +33,52 @@
         </div>
 
         <div class="new-task">
-        <form>
-            <div class="form-group">
-                <label for="inputNameTask">Название задания</label>
-                <input type="text" class="form-control name-task" id="inputNameTask" aria-describedby="textHelp">
-                <small id="textHelp" class="form-text text-muted">Обязательное для заполнения.</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Описание задания</label>
-                <textarea class="form-control task-description" id="exampleFormControlTextarea1" rows="5"></textarea>
-            </div>
-            <div class="form-group">
-                <label class="my-1 mr-2" for="forSelect">Приоритет</label>
-                <select class="custom-select my-1 mr-sm-2" id="forSelect">
-                    <option selected value="Триальное">Триальное</option>
-                    <option value="Бессрочное">Бессрочное</option>
-                    <option value="Срочное">Срочное</option>
-                </select>
-            </div>
-            <button type="submit" class="btn add-new-task">Добавить</button>
-            <button type="submit" class="btn close-form">Отменить</button>
-        </form>
+            <form>
+                <div class="form-group">
+                    <label for="inputNameTask">Название задания</label>
+                    <input type="text" class="form-control name-task" id="inputNameTask" aria-describedby="textHelp">
+                    <small id="textHelp" class="form-text text-muted">Обязательное для заполнения.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Описание задания</label>
+                    <textarea class="form-control task-description" id="exampleFormControlTextarea1"
+                        rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="my-1 mr-2" for="forSelect">Приоритет</label>
+                    <select class="custom-select my-1 mr-sm-2" id="forSelect">
+                        <option selected value="Триальное">Триальное</option>
+                        <option value="Бессрочное">Бессрочное</option>
+                        <option value="Срочное">Срочное</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn add-new-task">Добавить</button>
+                <button type="submit" class="btn close-form">Отменить</button>
+            </form>
+        </div>
+        <div class="redit-task">
+            <form>
+                <div class="form-group">
+                    <label for="inputNameTask">Название задания</label>
+                    <input type="text" class="form-control name-task" id="inputNameTask" aria-describedby="textHelp">
+                    <small id="textHelp" class="form-text text-muted">Обязательное для заполнения.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Описание задания</label>
+                    <textarea class="form-control task-description" id="exampleFormControlTextarea1"
+                        rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="my-1 mr-2" for="forSelect">Приоритет</label>
+                    <select class="custom-select my-1 mr-sm-2" id="forSelect">
+                        <option selected value="Триальное">Триальное</option>
+                        <option value="Бессрочное">Бессрочное</option>
+                        <option value="Срочное">Срочное</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn add-new-task">Изменить</button>
+                <button type="submit" class="btn close-form">Отменить</button>
+            </form>
         </div>
     </div>
     <script src="script.js"></script>
