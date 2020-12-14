@@ -55,6 +55,9 @@
     vertical-align:top;
     border-top:1px solid #dee2e6;
 }
+.redit-task {
+    display: none;
+}
 
 .add-task {
     display: flex;
@@ -67,11 +70,7 @@
     display: none;
 }
 
-.visible {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 
 
@@ -118,6 +117,16 @@ textarea.form-control{
     appearance:none;
 }
 
-.redit-task {
-    display: none;
+
+
+.visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.name-task.warning {
+  color: #ff0000;
+  border-color: #ff0000;
 }

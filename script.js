@@ -1,34 +1,32 @@
 let data = {
-    part0: [
-      {
-        name: 'Помыть пол',
-        description: 'Помыть полы в доме',
-        priority: 'Высокий'
-      }, {
-        name: 'Помыться',
-        description: 'Помыться',
-        priority: 'Высокий'
-      }, {
-        name: 'Побриться',
-        description: 'Побриться',
-        priority: 'Высокий'
-      }
-    ],
-    part1: [
-      {
-        name: 'Побриться',
-        description: '---',
-        priority: 'Высокий'
-      }
-    ],
-    part2: [
-      {
-        name: 'Помыться',
-        description: '---',
-        priority: 'Высокий'
-      }
-    ]
+    part0: [],
+    part1: [],
+    part2: []
   };
+  
+  function closeForm() {
+    nameTask.value = '';
+    taskDescription.value = '';
+    $newTask.classList.remove('visible')
+    }
+  function addFormRedit(mass) {
+    let $reditButton = document.querySelectorAll('.redit');
+    for (let i = 0; i < $reditButton.length; i++) {
+        $reditButton[i].addEventListener('click', function () {
+            $reditTaskForm.classList.add('visible')
+            $nameTaskRedit.value = mass[i].name;
+            $taskDescriptionRedit.value = mass[i].description;
+            $customSelectRedit.value = mass[i].priority;
+            $btnReditTask.setAttribute("data-number", i)
+          })}
+  }
+
+  function reditTask(mass, tableDrawFunction) {
+      mass[$btnReditTask.dataset.number].name = $nameTaskRedit.value;
+      mass[$btnReditTask.dataset.number].description = $taskDescriptionRedit.value;
+      mass[$btnReditTask.dataset.number].priority = $customSelectRedit.value;
+      tableDrawFunction(mass)
+    }
   
 
   function deleteTask(mass, tableDrawFunction) {
@@ -73,19 +71,21 @@ let data = {
   function tableDrawCurrentTask(mass){
 	let $table = document.querySelector('.table-content');
 	$table.innerHTML = '';
-  for(let el of mass){
+  for(let i = 0; i < mass.length; i++){
     $table.innerHTML += `<tr>
-        <td>${el.name}</td>
-        <td>${el.description}</td>
-        <td>${el.priority}</td>
+        <td>${mass[i].name}</td>
+        <td>${mass[i].description}</td>
+        <td>${mass[i].priority}</td>
         <td><button class="redit">Редактировать</button>
             <button class="finished">Выполнено</button>
-            <button class="delete">Удалить</button>
+            <button class="delete" >Удалить</button>
         </td>
       </tr>`;
   }
-  deleteTask(data.part0, tableDrawCurrentTask)
+  deleteTask(mass, tableDrawCurrentTask)
   finishedTask()
+  addFormRedit(mass)
+  
 }
 
 
@@ -102,7 +102,10 @@ function tableDrawFinishedTask(mass){
         </td>
       </tr>`;
   }
-  deleteTask(data.part1, tableDrawFinishedTask)
+
+  deleteTask(mass, tableDrawFinishedTask)
+  addFormRedit(mass)
+  closeForm();
 }
 
 
@@ -119,7 +122,17 @@ function tableDrawDeleteTask(mass){
       </tr>`;
   }
   recoverTask();
+  closeForm();
 }
+
+function closeReditForm() {
+  $reditTaskForm.classList.remove('visible')
+}
+
+
+let $btnReditTask = document.querySelector('.btn-redit-task')
+
+
 
 
 let $btn = document.querySelectorAll('.tab');
@@ -142,6 +155,8 @@ for(let i = 0; i < $btn.length; i++){
     toggler('.tab', i, 'active');
     if(i === 0) {
       tableDrawCurrentTask(data['part' + i]);
+
+      
     }
     else if(i === 1) {
       tableDrawFinishedTask(data['part' + i]);
@@ -151,6 +166,21 @@ for(let i = 0; i < $btn.length; i++){
     }
   })
 }
+// Переменные редактирования
+let $nameTaskRedit = document.querySelector('.name-task-redit');
+let $taskDescriptionRedit = document.querySelector('.task-description-redit');
+let $customSelectRedit = document.querySelector(".custom-select-redit");
+
+
+let $closeReditBtn = document.querySelector('.btn-close-redit')
+let $reditTaskForm = document.querySelector('.redit-task');
+//Функция закрытия
+$closeReditBtn.addEventListener('click', function(event) {
+  event.preventDefault();
+  closeReditForm()
+})
+
+
 
 let $addTaskbutton = document.querySelector('.add-task')
 let $newTask = document.querySelector('.new-task')
@@ -166,7 +196,11 @@ let taskDescription = document.querySelector('.task-description')
 let taskSelect = document.querySelector('.custom-select')
 $addNewTask.addEventListener("click", function(event) {
   event.preventDefault();
-
+if(nameTask.value === '') {
+  nameTask.classList.add('warning');
+}
+else {
+  nameTask.classList.remove('warning');
   let newTask = {
     name: nameTask.value,
     description: taskDescription.value,
@@ -176,26 +210,41 @@ $addNewTask.addEventListener("click", function(event) {
   tableDrawCurrentTask(data.part0)
   nameTask.value = '';
   taskDescription.value = '';
+  closeForm()
+}
 }
 )
+
+
+
+
+
 
 let $closeForm = document.querySelector('.close-form')
 
 $closeForm.addEventListener("click", function(event) {
   event.preventDefault();
-  nameTask.value = '';
-  taskDescription.value = '';
-  $newTask.classList.remove('visible')
+  closeForm();
 }
 )
 
-let $reditButton = document.querySelectorAll('.redit');
-let $reditTaskForm = document.querySelectorAll('.redit-task');
-for (let i = 0; i < $reditButton.length; i++) {
-    $reditButton[i].addEventListener('click', function () {
-      $reditTaskForm.classList.add('add-task')
-        console.log(data.part0[i].name)
-        console.log(data.part0[i].description)
-        console.log(data.part0[i].priority)
-    })
-}
+$btnReditTask.addEventListener("click", function(event) {
+  event.preventDefault();
+  let nubmerActiveTab = document.querySelector(".active");
+
+  if(nubmerActiveTab.dataset.activeTab == 1) {
+  reditTask(data.part0, tableDrawCurrentTask);
+  }
+  else if (nubmerActiveTab.dataset.activeTab == 2) {
+    reditTask(data.part1, tableDrawFinishedTask);
+  }
+})
+
+nameTask.addEventListener('input', function() {
+
+  nameTask.classList.remove('warning');
+});
+
+
+    
+    // Заблокируйте кнопку отправки здесь
