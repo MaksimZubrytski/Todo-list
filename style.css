@@ -59,20 +59,15 @@
     display: none;
 }
 
-.add-task {
+.add-task-button {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
 .new-task {
     display: none;
 }
-
-
-
-
 
 .form-group {
     margin-bottom: 1rem;
@@ -126,7 +121,12 @@ textarea.form-control{
 }
 
 
-.name-task.warning {
+.warning {
   color: #ff0000;
   border-color: #ff0000;
+}
+
+
+.unvisible {
+    display: none;
 }
