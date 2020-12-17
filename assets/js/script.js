@@ -215,6 +215,7 @@ function reditTask(mass, tableDrawFunction) {
     mass[$btnReditTask.dataset.number].name = $nameTaskRedit.value;
     mass[$btnReditTask.dataset.number].description = $taskDescriptionRedit.value;
     mass[$btnReditTask.dataset.number].priority = $customSelectRedit.value;
+    localStorage.setItem('todo-list', JSON.stringify(todo));
     tableDrawFunction(mass)
 }
 
