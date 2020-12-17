@@ -2,18 +2,19 @@ import controlForm from './controlForm.js';
 
 const form = controlForm();
 
+let todo = {
+    currentTask: [],
+    finishedTask: [],
+    deleteTask: []
+};
+
+
 if(localStorage.getItem('todo-list')){
   let ls = localStorage.getItem('todo-list');
 
   todo = JSON.parse(ls);
   tableDrawCurrentTask(todo.currentTask)
 }
-
-let todo = {
-    currentTask: [],
-    finishedTask: [],
-    deleteTask: []
-};
 
 function tableDrawCurrentTask(mass){
     let $table = document.querySelector('.table-content');
