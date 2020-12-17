@@ -2,6 +2,13 @@ import controlForm from './controlForm.js';
 
 const form = controlForm();
 
+if(localStorage.getItem('todo-list')){
+  let ls = localStorage.getItem('todo-list');
+
+  todo = JSON.parse(ls);
+  tableDrawCurrentTask(todo.currentTask)
+}
+
 let todo = {
     currentTask: [],
     finishedTask: [],
@@ -183,6 +190,7 @@ $addNewTask.addEventListener("click", function(event) {
           priority: taskSelect.value
       };
   todo.currentTask.push(newTask)
+  localStorage.setItem('todo-list', JSON.stringify(todo));
   tableDrawCurrentTask(todo.currentTask)
   nameTask.value = '';
   taskDescription.value = '';
