@@ -57,6 +57,7 @@ function deleteTask(mass, tableDrawFunction) {
       $deleteTask[i].addEventListener('click', function() {
         let deleteTask = mass.splice(i, 1);
         todo.deleteTask.push(deleteTask[0])
+        localStorage.setItem('todo-list', JSON.stringify(todo));
         tableDrawFunction(mass)
       })
   }
@@ -69,6 +70,7 @@ function finishedTask() {
           
           let finishedTask = todo.currentTask.splice(i, 1);
           todo.finishedTask.push(finishedTask[0])
+          localStorage.setItem('todo-list', JSON.stringify(todo));
           tableDrawCurrentTask(todo.currentTask)
           
         })
@@ -120,6 +122,7 @@ function recoverTask() {
           
         let recoverTask = todo.deleteTask.splice(i, 1);
         todo.currentTask.push(recoverTask[0])
+        localStorage.setItem('todo-list', JSON.stringify(todo));
         tableDrawDeleteTask(todo.deleteTask)
         })
     }
